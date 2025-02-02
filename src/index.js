@@ -70,7 +70,7 @@ function createScatterplot() {
         radiusMinPixels: minRadius,
         radiusMaxPixels: maxRadius,
         getPosition: d => [d.longitude, d.latitude],
-        getFillColor: d => d.n_killed > 0 ? [200, 0, 40, 150] : [255, 140, 0, 100],
+        getFillColor: d => [247, 87, 87, 255],
         pickable: true,
         onClick: ({object, x, y}) => {
             window.open(`https://www.gunviolencearchive.org/incident/${object.incident_id}`);
@@ -138,7 +138,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
                     // Construct the text content with summary and score
                     listItem.innerHTML = `
                     <div class="route-entry">
-                        <strong><span style="padding-bottom: 10px;">Route ${i + 1}:</span></strong> ${response.routes[i].summary}
+                        <strong><span style="padding-bottom: 10px;">Route ${i + 1}:</span></strong> ${response.routes[i].legs[0].duration.text}
                         <span class="score" style="${scoreStyle}">${route_score}</span>
                         <br>
                     </div>
