@@ -8,6 +8,7 @@ import apiKey from './config';
 let minRadius = 4;
 let maxRadius = 5;
 let scatterplotLayer;
+const sourceData = './gundata.json';
 
 
 window.initMap = () => {
@@ -45,33 +46,34 @@ window.initMap = () => {
     let zoomLevel = map.getZoom();
 
     // Adjust radius based on zoom level (you can modify this calculation as needed)
-    minRadius = 4 + (zoomLevel * 0.5);
-    maxRadius = 5 + (zoomLevel * 0.5);
+    minRadius = 1 + (zoomLevel * 0.5);
+    maxRadius = 10 + (zoomLevel * 0.5);
 
     console.log
     const overlay = new GoogleMapsOverlay({
         layers: [
-            createScatterplot()//,
-            //heatmap()
+            //createScatterplot(),
+            heatmap()
         ],
     });
     overlay.setMap(map);
 }
 
-const sourceData = './gundata.json';
-
 function createScatterplot() {
-    
     scatterplotLayer = new ScatterplotLayer({
         id: 'scatter',
         data: sourceData,
         opacity: 0.8,
-        filled: true,
         radiusMinPixels: minRadius,
         radiusMaxPixels: maxRadius,
         getPosition: d => [d.longitude, d.latitude],
         getFillColor: d => [247, 87, 87, 255],
         pickable: true,
+        getIcon: d => ({
+            url: 'her-route/public/location_pin.png',  // Replace with emoji image or URL
+            width: 32, // Set the width of the icon
+            height: 32, // Set the height of the icon
+        }),
         onClick: ({object, x, y}) => {
             window.open(`https://www.gunviolencearchive.org/incident/${object.incident_id}`);
         },
@@ -86,6 +88,15 @@ const heatmap = () => new HeatmapLayer({
     getPosition: d => [d.longitude, d.latitude],
     getWeight: d => d.n_killed + (d.n_injured * 0.5),
     radiusPixels: 60,
+    colorRange: [
+        [128, 162, 255],  // Blue for low values
+        [0, 255, 255],  // Cyan for medium values
+        [221, 255, 128],  // Yellow for higher values
+        [247, 87, 87]   // Red for high values
+    ],
+    onClick: ({object, x, y}) => {
+        window.open(`https://www.gunviolencearchive.org/incident/${object.incident_id}`);
+    },
 });
 
 
