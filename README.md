@@ -14,12 +14,29 @@ We were driven to create *her route* by the clear need to improve women's safety
 - Hosting: AWS is utilized to host the website, with the domain registered through Spaceship.
 
 ## Challenges we ran into
--Hosting: Initial configuration of our AWS instance for website hosting presented unexpected difficulties. These were successfully addressed through careful review of AWS documentation and online tutorials, resulting in a fully functional deployment.
--HTML: We ran into errors while creating visual elements on the front-end website.
+- Hosting: Initial configuration of our AWS instance for website hosting presented unexpected difficulties. These were successfully addressed through careful review of AWS documentation and online tutorials, resulting in a fully functional deployment.
+- HTML: We ran into errors while creating visual elements on the front-end website.
 ## Accomplishments that we're proud of
 -Fixing AWS issues, most documentation for AWS was outdated and could not be used. Finding online tutorials helped to resolve hosting issues.
 ## What we learned
--Hosting: Resolving the AWS configuration challenges highlighted the importance of critically evaluating official documentation and supplementing it with diverse secondary resources to effectively troubleshoot and implement solutions
+- Hosting: Resolving the AWS configuration challenges highlighted the importance of critically evaluating official documentation and supplementing it with diverse secondary resources to effectively troubleshoot and implement solutions
 ## What's next for Her Route
 - Address the slow speed of the site
 - Find more sources for crime data
+# Starting local instance
+To get started with a local instance hosted on localhost first, initialize npm and install webpack.
+
+```
+npm init -y 
+npm i -D webpack-dev-server webpack webpack-cli
+```
+Then, install deck.gl.
+
+```
+npm i @deck.gl/{core,google-maps,layers,aggregation-layers}
+```
+Finally, start the local instance.
+
+```
+npm start
+```
